@@ -1,9 +1,447 @@
 ---
-title: "About"
+title: "Netflix Text Analysis"
+author: "Lea Komba"
+format: 
+  html:
+    code-fold: true
+    code-tools: true
+editor: visual
 ---
 
-About this site
+#Introduction: What Stories Is Netflix Telling Us?
+
+Netflix has revolutionized how we consume entertainment, but have you ever wondered how the streaming giant describes its content? The words chosen to summarize movies and TV shows aren't random—they're carefully crafted to attract specific audiences while accurately representing the content.
+
+In this analysis, I dive deep into Netflix's title descriptions to uncover:
+
+*What words appear most frequently?*
+
+*How does sentiment differ across content?*
+
+*Do TV ratings (TV-MA, TV-14, PG, etc.) use different language?*
+
+*What happens when negation words like "not" or "never" flip the meaning?*
+
+Let's explore what 8,000+ Netflix descriptions reveal about how we talk about entertainment.
+
+#Uploading the data to the environment
 
 ```{r}
-1 + 1
+#| include: FALSE
+
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(wordcloud)
+library(wordcloud2)
+library(viridis)
+library(ggthemes)
+library(gutenbergr)
+library(RCurl)
+
+Netflix_Data <- read_csv("C://Users//komba1//Downloads//Leas data set.csv") 
+
 ```
+
+#Data tyding
+
+Just a for fun: By running this code we can see the number of movies vs TV Shows that we have in the data. Later on in this project I will be looking at specific show/movie descriptions, however I will look at them combined and not differentiate if some words are for movie or TV show descriptions. Here we have 6131 movies and 2676 TV Shows.
+
+```{r}
+
+Netflix_Data <- read_csv("C://Users//komba1//Downloads//Leas data set.csv") 
+
+Netflix_Data|>
+  count(type)
+
+```
+
+#Data tidying
+
+```{r}
+tidy_netflix <- Netflix_Data |>
+  mutate(line = row_number()) |>
+  unnest_tokens(word, description, token = "words")
+```
+
+#The Big Picture
+
+Most Common Words in Netflix Descriptions Before diving into sentiment, let's look at the words Netflix uses most frequently to describe its content:
+
+```{r}
+#| fig.cap: "The top 20 most common words in the descriptions of Netflix shows and movies have amongst them words such as life, deatch, father, love, woman, friends, etc. We can see here that the most common word in this very simple analysis is life , and the least common word out of the top 20 is father."
+#| fig.alt: "This barplot shows the distribution of the most common words in the Netflix dataset. In the x-axis we have the number of times these words appear ranging from 0 to 800, and the y-axis represents the top 20 most common words, ranging from life(most common) to father(least common)."
+
+tidy_netflix |>
+  anti_join(get_stopwords(source = "smart")) |>
+  count(word, sort = TRUE) |>
+  filter(word != "NA") |>
+  slice_max(n, n = 20) |>
+  ggplot(aes(fct_reorder(word, n), n)) +
+  geom_col() +
+  coord_flip()
+```
+
+#The Emotional Palette
+
+Positive vs. Negative Words Using the Bing sentiment lexicon, I classified words as positive or negative to see the emotional balance:
+
+```{r}
+get_sentiments(lexicon = "afinn")
+get_sentiments(lexicon = "nrc")
+get_sentiments(lexicon = "bing")
+
+bing_sentiments <- get_sentiments(lexicon = "bing")
+
+tidy_netflix |>   
+  inner_join(bing_sentiments) |>
+  count(sentiment)
+```
+
+Here we can see that from the most common words in this dataset, 11465 have a negative sentiment and 7919 have a positive sentiment.
+
+```{r}
+#| fig.cap: "From the top 20 most common words in the descriptions of Netflix shows and movies, we split them in half showing the top 10 words with negative or positive sentiment. Words such as murder, mysterious and crime have negative sentiment, whreas words like best, work and love have positive sentiment. From the words with negative sentiment, murder is the one that shows up the most whereas dangerous shows up the least. For words with positive sentiment, love is the  one that appears more often and modern appears the least. Based on the range on the Y-axis for this plot, we can observe something interesting: the fact that the graph that represents negativ sentiment has a y-axis ranging from 0 - 200 while the graph with positive sentiment ranges from 0 - 500, can tell us that overall in this data set, words with positive sentiment appear more often."
+
+#| fig.alt: "This barplot shows the distribution of the most common words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the number of times these words appear ranging from 0 to 200 (negative sentiment) and 0 to 500 (positive sentiment), and the y-axis represents the top 10 most common words, ranging from most common to least common; and the graph is wrapped based on the sentiment."
+
+tidy_netflix |>
+  inner_join(bing_sentiments,relationship = "many-to-many") |>
+  count(sentiment, word, sort = TRUE) |>
+  group_by(sentiment) |>
+  slice_max(n, n = 10) |>
+  ungroup() |>
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+    geom_col() +  
+    coord_flip() +
+    facet_wrap(~ sentiment, scales = "free")
+```
+
+According to what we can see in this wordclout , these are the words that are more often mentioned in descriptions of netflix shows. The larger the word size, the more often it appears.
+
+```{r}
+##whch ones are positive and which ones are negative?
+library(reshape2)
+
+tidy_netflix %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE) %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = brewer.pal(6, "Dark2"),
+                   max.words = 100)
+```
+
+#Beyond Single Words
+
+The Power of Bigrams Single words can be misleading. For example, "love" might appear in "love story" (positive) or "love gone wrong" (negative). That's why I analyzed bigrams—two-word combinations to capture context:
+
+```{r}
+netflix_ngram <- Netflix_Data |>
+  unnest_tokens(bigram, description, token = "ngrams", n = 2) |>
+  filter(bigram != "NA")
+
+netflix_ngram
+
+netflix_ngram |>
+  count(bigram, sort = TRUE)
+
+##Let's remove stop words
+netflix_bigrams_filtered <- netflix_ngram |>
+  separate(bigram, c("word1", "word2"), sep = " ") |>
+  filter(!word1 %in% stop_words$word,
+         !word2 %in% stop_words$word) |>
+  count(word1, word2, sort = TRUE)
+netflix_bigrams_filtered 
+
+```
+
+#visualizing bigrams in a network
+
+```{r}
+#| warning: FALSE
+#| message: FALSE
+
+#| fig.cap: "From the most common paired words we can see in this network plot, how often and which words are paired in this dataset. The largest network, is the one that connects crime->organized to family->life_>changing."
+
+#| fig.alt: "This network plot shows the connection between paired words, showing of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "
+
+library(igraph)
+
+# filter for only relatively common combinations
+bigram_graph <- netflix_bigrams_filtered |>
+  filter(n > 10) |>
+  graph_from_data_frame()
+
+bigram_graph
+
+# Use ggraph to convert into a network plot
+library(ggraph)
+set.seed(2017)
+
+ggraph(bigram_graph, layout = "fr") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+
+# polish the graph
+set.seed(2020)
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+
+ggraph(bigram_graph, layout = "fr") +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+  geom_node_point(color = "lightpink", size = 5) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+```
+
+#Bigrams sentiments 
+
+Now lets look at the context in which these combination of words appear so that we can see if they actually contribute to a negative or positive sentiment.
+
+```{r}
+netflix_bigrams_afinn <- netflix_ngram |>
+  separate(bigram, c("word1", "word2"), sep = " ") |>
+  filter(!word1 %in% stop_words$word,
+         !word2 %in% stop_words$word) |>
+  count(word1, word2, sort = TRUE) |>
+  
+  # Add AFINN scores
+  left_join(get_sentiments("afinn"), by = c("word1" = "word")) |>
+  rename(afinn_word1 = value) |>
+  left_join(get_sentiments("afinn"), by = c("word2" = "word")) |>
+  rename(afinn_word2 = value) |>
+  
+  # Create combined sentiment columns
+  mutate(
+    # Replace NA with 0
+    afinn_word1 = replace_na(afinn_word1, 0),
+    afinn_word2 = replace_na(afinn_word2, 0),
+    
+    # Combined scores
+    combined_sum = afinn_word1 + afinn_word2,
+    
+    
+    # Sentiment category based on combined score
+    combined_sentiment_afinn = case_when(
+      combined_sum > 2 ~ "very positive",
+      combined_sum > 0 ~ "positive",
+      combined_sum == 0 ~ "neutral",
+      combined_sum < 0 ~ "negative",
+      combined_sum < -2 ~ "very negative"
+    )
+  )
+
+# View results
+netflix_bigrams_afinn |>
+  select(word1, word2, n, afinn_word1, afinn_word2, 
+         combined_sum, combined_sentiment_afinn) |>
+  filter(afinn_word1 != 0 | afinn_word2 != 0) |>
+  head(20)
+```
+
+#The Negation Effect: When "Not" Changes Everything
+
+One of the most fascinating aspects of language is how negation words flip meaning. "Good" is positive, but "not good" is negative. Conversely, "bad" is negative, but "not bad" is positive.
+
+Let's see how Netflix uses negation:
+
+```{r}
+
+netflix_afinn <- get_sentiments("afinn")
+
+bigrams_separated <- netflix_ngram |>
+  separate(bigram, c("word1", "word2"), sep = " ") |>
+  count(word1, word2, sort = TRUE) |>
+  filter(!is.na(word1) & !is.na(word2))
+
+bigrams_separated |> filter(word1 == "not")
+
+not_words <- bigrams_separated |>
+  filter(word1 == "not") |>
+  inner_join(netflix_afinn, by = c(word2 = "word")) |>
+  arrange(desc(n))
+
+not_words
+```
+
+```{r}
+
+#| fig.cap: "From the most common words that are often accompained by a negation word (no, not, never, without), we can see that the words that come after the negation word never, when combined have a more negative sentiment, whereas words that come after the negation word without, often tend to a slighty positive sentiment."
+
+#| fig.alt: "This barplot shows the distribution of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "
+
+# An example of expanding the list of negation words
+negation_words <- c("not", "no", "never", "without")
+
+negated_words <- bigrams_separated |>
+  filter(word1 %in% negation_words) |>
+  inner_join(netflix_afinn, by = c(word2 = "word")) |>
+  arrange(desc(n))
+
+negated_words
+
+negated_words |>
+  mutate(contribution = n * value) |>
+  arrange(desc(abs(contribution))) |>
+  group_by(word1) |>
+  slice_max(abs(contribution), n = 10) |>
+  ungroup() |>
+  mutate(word2 = reorder(word2, contribution)) |>
+  ggplot(aes(n * value, word2, fill = n * value > 0)) +
+    geom_col(show.legend = FALSE) +
+    facet_wrap(~ word1, scales = "free") +
+    labs(x = "Sentiment value * number of occurrences",
+         y = "Words preceded by negation term")
+```
+
+#Rating Matters: How Language Differs by TV Rating
+
+Now for the most revealing part of my analysis: How does language change across different TV ratings?
+
+I filtered out duration-based ratings (like "90 min") and focused on content ratings: TV-MA, TV-14, TV-PG, R and PG-13.
+
+#Bigrams: Word Pairs by Rating
+
+```{r}
+#| fig.cap: "When analysing how the paired words are distributed across the selected TV rating types, we can see that for R and TV-PG the TV-Shows or Movies have most often paired words with negative or neutral sentiment, whereas for PG-13 and TV-14 we see most often neutral themes."
+
+
+# First, let's create a bigram dataset with ratings and sentiment
+bigrams_with_ratings <- Netflix_Data |>
+  filter(!str_detect(rating, "^\\d+ min$")) |>
+  filter(rating %in% c("R", "TV-14","PG-13","TV-MA","TV-PG"))|>
+  mutate(line = row_number()) |>
+  unnest_tokens(bigram, description, token = "ngrams", n = 2) |>
+  separate(bigram, c("word1", "word2"), sep = " ", remove = FALSE) |>
+  filter(!is.na(word1) & !is.na(word2)) |>
+  filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) |>
+  
+  # Add sentiment for both words using AFINN
+  left_join(get_sentiments("afinn"), by = c("word1" = "word")) |>
+  rename(afinn_word1 = value) |>
+  left_join(get_sentiments("afinn"), by = c("word2" = "word")) |>
+  rename(afinn_word2 = value) |>
+  
+  # Calculate combined sentiment
+  mutate(
+    afinn_word1 = replace_na(afinn_word1, 0),
+    afinn_word2 = replace_na(afinn_word2, 0),
+    combined_score = afinn_word1 + afinn_word2,
+    bigram_sentiment = case_when(
+      combined_score > 0 ~ "positive",
+      combined_score < 0 ~ "negative",
+      TRUE ~ "neutral"
+    )
+  )
+
+# Now count bigrams by rating and sentiment
+bigrams_by_rating <- bigrams_with_ratings |>
+  count(rating, bigram, bigram_sentiment, sort = TRUE) |>
+  group_by(rating) |>
+  slice_max(n, n = 5) |>  # Top 5 bigrams per rating
+  ungroup()
+
+# Plot
+bigrams_by_rating |>
+  ggplot(aes(x = fct_reorder(bigram, n), y = n, fill = bigram_sentiment)) +
+    geom_col() +
+    coord_flip() +
+    facet_wrap(~ rating, scales = "free_y") +
+    scale_fill_manual(values = c("positive" = "darkgreen", 
+                                  "negative" = "darkred", 
+                                  "neutral" = "gray50")) +
+    labs(
+      title = "Most Common Bigrams by TV Rating",
+      subtitle = "Colored by combined AFINN sentiment score",
+      x = "Bigrams", 
+      y = "Frequency",
+      fill = "Sentiment"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(size = 8, face = "bold"),
+      legend.position = "bottom",
+      axis.text.y = element_text(size = 7)
+    )
+  
+```
+
+#Unigrams: Single Words by Rating
+
+```{r}
+#| fig.cap: "When analysing how single words are distributed across the selected TV rating types, we can see that for R, TV-MA and TV-14  the TV-Shows or Movies have most often single words with negative sentiment, whereas for PG-13 and TV-PG we see most often positive sentiment"
+
+tidy_netflix |>
+  filter(!str_detect(rating, "^\\d+ min$")) |>
+  filter(rating %in% c("R", "TV-14","PG-13","TV-MA","TV-PG"))|>
+  inner_join(bing_sentiments, relationship = "many-to-many") |>
+  count(rating, word, sentiment, sort = TRUE) |>
+  group_by(rating) |>
+  slice_max(n, n = 5) |>  # Top 5 words per rating
+  ungroup() |>
+  ggplot(aes(x = fct_reorder(word, n), y = n, fill = sentiment)) +
+    geom_col() +
+    coord_flip() +
+    facet_wrap(~ rating, scales = "free_y") +
+    labs(
+      title = "Most Common Words by TV Rating",
+      x = "Words", 
+      y = "Frequency",
+      fill = "Sentiment"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(size = 8, face = "bold"),
+      legend.position = "bottom"
+    )
+```
+
+#Negation Patterns Across Ratings Finally, let's see how negation words behave differently across content ratings:
+
+```{r}
+negated_words_by_rating <- Netflix_Data |>
+  filter(!str_detect(rating, "^\\d+ min$")) |>
+    filter(rating %in% c("R", "TV-14","PG-13","TV-MA","TV-PG"))|>
+
+  mutate(line = row_number()) |>
+  unnest_tokens(bigram, description, token = "ngrams", n = 2) |>
+  separate(bigram, c("word1", "word2"), sep = " ", remove = FALSE) |>
+  filter(!is.na(word1) & !is.na(word2)) |>
+  filter(word1 %in% negation_words) |>
+  inner_join(get_sentiments("afinn"), by = c("word2" = "word")) |>
+  count(rating, word1, word2, value, sort = TRUE) |>
+  mutate(contribution = n * value)
+
+negated_words_by_rating |>
+  group_by(rating, word1) |>
+  slice_max(abs(contribution), n = 5) |>
+  ungroup() |>
+  mutate(word_label = paste(word1, word2, sep = " → ")) |>
+  ggplot(aes(x = rating, y = fct_reorder(word_label, contribution), fill = contribution)) +
+    geom_tile() +
+    scale_fill_gradient2(
+      low = "darkred", 
+      mid = "white", 
+      high = "darkgreen",
+      midpoint = 0,
+      name = "Contribution"
+    ) +
+    labs(
+      title = "Negation Word Pairs Across Ratings",
+      subtitle = "Green = positive context after negation, Red = negative context after negation",
+      x = "Rating", 
+      y = "Negation → Word pairs"
+    ) +
+    theme_minimal() 
+    
+```
+
+#What have we Learned About Netflix's Language? 
+
+Based on this comprehensive analysis of over 8,000 Netflix titles, we can conclude that Netflix's description language reveals a sophisticated content strategy that balances emotional appeal with audience targeting. While the raw counts show more negative words (11,465) than positive words (7,919) overall, positive terms like "love," "best," and "work" appear more frequently.
+
+The most revealing finding here is how language shifts dramatically by content rating: mature-rated content (R, TV-MA, TV-14) relies heavily on negative sentiment words associated with crime, violence, and psychological tension, while youth-oriented ratings (PG-13, TV-PG) feature more positive and neutral language centered on friendship and adventure. In addition the analysis of negation patterns further demonstrates that words following "never" tend toward negative sentiment while those after "without" lean positive, showing how Netflix uses context to create nuanced descriptions that manage viewer expectations.
+
+Ultimately, these patterns reveal that Netflix's descriptions are carefully crafted linguistic tools that not only summarize content but strategically signal genre conventions, emotional journeys, and appropriate audiences through deliberate word choices and contextual framing.
+

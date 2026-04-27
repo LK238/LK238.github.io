@@ -1,0 +1,447 @@
+---
+title: "Iteractive maps"
+format: 
+  html:
+    code-fold: true
+    code-tools: true
+editor_options: 
+  chunk_output_type: console
+author: Lea Komba
+---
+
+```{r}
+#| message: false
+#| warning: false
+
+# Initial packages required (we'll be adding more)
+library(tidyverse)
+library(mdsr)      # package associated with our MDSR book
+library(leaflet)
+library(sf)
+library(dplyr)
+library(htmltools)
+library(glue)
+library(rvest)
+library(polite)
+```
+
+
+# Introduction: What Shapes the American Landscape?
+
+When we think about the United States, we often focus on political divisions or cultural differences. But beneath the surface of red state vs. blue state debates lie more tangible patterns that affect millions of lives every day. Two questions drive this analysis:
+
+**How does road safety vary across the country?** Every year, thousands of Americans lose their lives in car crashes. But these tragedies aren't evenly distributed. Understanding where fatalities are highest can inform everything from infrastructure investment to public safety campaigns.
+
+**How do political leanings map onto our mental models of America?** We all have stereotypes about which states are "blue" and which are "red." But does the data confirm our assumptions? And how has political competition evolved?
+
+In this interactive exploration, I map two characteristics collected by the poliscidata package: car fatality rates from 2007 and the Cook Partisan Voting Index. By visualizing these variables at the state level, we can move beyond anecdotes and see the geographic patterns that define modern America.
+
+*Note: All maps exclude Alaska and Hawaii to focus on the contiguous 48 states.*
+
+```{r}
+#| message: false
+#| results: 'hide'
+
+library(sf) #<1>
+states <- read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson")  #<2>
+class(states) #<3>
+states
+```
+
+# Part 1: Correcting the Record on Population Density
+
+Before diving into my main analysis, I wanted to address a curiosity I discovered. The population density data that comes with the standard US states shapefile appears to be incorrect. Here's a quick comparison showing the corrected version using Wikipedia data.
+
+*Data source: Wikipedia (List of states and territories by population density)*
+
+1. `sf` stands for "simple features"
+2. From https://leafletjs.com/examples/choropleth/us-states.js
+3. Note that `states` has class `sf` in addition to the usual `tbl` and `df`
+
+
+For maps in `leaflet` that show boundaries and not just points, we need to input a shapefile rather than a series of latitude-longitude combinations like we did for the `maps` package.  In the example we're emulating, they use the `read_sf()` function from the `sf` package to read in data.  While our `us_states` data frame from the `maps` package contained 15537 rows, our simple features object `states` contains only 52 rows - one per state.  Importantly, `states` contains a column called `geometry`, which is a "multipolygon" with all the information necessary to draw a specific state.  Also, while `states` can be treated as a tibble or data frame, it is also an `sf` class object with a specific "geodetic coordinate reference system".  Again, take Spatial Data Analysis for more on shapefiles and simple features!
+
+Note also that the authors of this example have already merged state population densities with state geometries, but if we wanted to merge in other state characteristics using the `name` column as a key, we could definitely do this!
+
+First we'll start with a static plot using a simple features object and geom_sf():
+
+```{r}
+# Create density bins as on the webpage
+state_plotting_sf <- states |>
+  mutate(density_intervals = cut(density, n = 8,
+          breaks = c(0, 10, 20, 50, 100, 200, 500, 1000, Inf))) |>
+  filter(!(name %in% c("Alaska", "Hawaii", "Puerto Rico")))
+
+ggplot(data = state_plotting_sf) + 
+  geom_sf(aes(fill = density_intervals), colour = "white", linetype = 2) + 
+#  geom_sf_label(aes(label = density)) +   # labels too busy here
+  theme_void() +  
+  scale_fill_brewer(palette = "YlOrRd") 
+```
+
+Now let's use `leaflet` to create an interactive plot!
+
+```{r}
+#| warning: false
+
+# Create our own category bins for population densities
+#   and assign the yellow-orange-red color palette
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
+
+# Create labels that pop up when we hover over a state.  The labels must
+#   be part of a list where each entry is tagged as HTML code.
+library(htmltools)
+library(glue)
+
+states <- states |>
+  mutate(labels = str_c(name, ": ", density, " people / sq mile"))
+
+# If want more HTML formatting, use these lines instead of those above:
+#states <- states |>
+#  mutate(labels = glue("<strong>{name}</strong><br/>{density} people / #mi<sup>2</sup>"))
+
+labels <- lapply(states$labels, HTML)
+
+leaflet(states) |>
+  setView(-98.5, 39.8, 4.5) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal(density),
+    weight = 1.5,
+    opacity = 0.8,
+    color = "black",
+    dashArray = "5.2",
+    fillOpacity = 0.85,
+    highlightOptions = highlightOptions(
+      weight = 4,
+      color = "red",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) |>
+  addLegend(pal = pal, values = ~density, opacity = 0.7, title = NULL,
+    position = "bottomright")
+```
+
+# Part 2: Mapping Road Safety Across America
+
+## 2.1 Car Fatality Rates: A Numeric Portrait
+
+The first variable I explored is `carfatal07` – the number of traffic fatalities per 100,000 people in 2007. This isn't just a number; behind each data point is a story of infrastructure quality, rural vs. urban geography, speed limits, and even cultural attitudes about driving.
+
+```{r}
+
+# Define the geojson URL
+us_geojson <- "https://rstudio.github.io/leaflet/json/us-states.geojson"
+
+# Code from OYO #1 in 09_table_scraping.qmd
+
+session <- bow("https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population_density", force = TRUE)
+
+result <- scrape(session) |>
+  html_nodes(css = "table") |> 
+  html_table(header = TRUE, fill = TRUE)
+density_table <- result[[1]]
+density_table
+
+density_data <- density_table |>
+  select(1, 2, 4, 5) |>
+  filter(!row_number() == 1) |>
+  rename(Land_area = `Land area`) |>
+  mutate(state_name = str_to_lower(as.character(Location)),
+         Density = parse_number(Density),
+         Population = parse_number(Population),
+         Land_area = parse_number(Land_area)) |>
+  select(-Location)
+
+density_data
+
+# Load the state geometry
+states_sf_alt <- st_read(us_geojson, quiet = TRUE) |>
+  mutate(state_name = str_to_lower(name))
+
+# Join the data
+states_final <- states_sf_alt |>
+  left_join(density_data, by = "state_name") |>
+  filter(!(name %in% c("Alaska", "Hawaii", "Puerto Rico")))  # Remove non-contiguous
+
+# Define the color palette 
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+pal <- colorBin("YlOrRd", domain = states_final$Density, bins = bins)
+
+# Create the map
+leaflet(states_final) |>
+  setView(-96, 37.8, 4) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal(Density),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    fillOpacity = 0.7,
+    label = ~glue("{name}: {Density} people/sq mi"),
+    highlightOptions = highlightOptions(weight = 5, bringToFront = TRUE)
+  ) |>
+  
+  addLegend(pal = pal, values = ~Density, title = "Population Density<br>(people/sq mi)")
+
+```
+
+
+2. The `states` dataset in the `poliscidata` package contains 135 variables on each of the 50 US states.  See [here](https://rdrr.io/cran/poliscidata/man/states.html) for more detail. The task here is to create a *two* meaningful choropleth plots, one using a numeric variable and one using a categorical variable from `poliscidata::states`. 
+
+```{r}
+#| message: false
+#| warning: false
+
+# Get info to draw US states for geom_polygon (connect the lat-long points)
+library(maps)
+states_polygon <- as_tibble(map_data("state")) |>
+  select(region, group, order, lat, long)
+
+# See what the state (region) levels look like in states_polygon
+unique(states_polygon$region)
+
+
+# Get info to draw US states for geom_sf and leaflet (simple features object 
+#   with multipolygon geometry column)
+library(sf)
+states_sf <- 
+  read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson") |>
+  select(name, geometry)
+
+# See what the state (name) levels look like in states_sf
+unique(states_sf$name)
+
+
+# Load in state-wise data for filling our choropleth maps
+#   (Note that I selected my two variables of interest to simplify)
+library(poliscidata)   # may have to install first
+polisci_data <- as_tibble(poliscidata::states) |>
+  select(state, carfatal07, cook_index3)
+
+# See what the state (state) levels look like in polisci_data
+unique(polisci_data$state)   # can't see trailing spaces but can see
+                             #   lack of internal spaces
+print(polisci_data)   # can see trailing spaces
+```
+
+```{r}
+# Make sure all keys have the same format before joining:
+#   all lower case, no internal or external spaces
+
+states_polygon <- states_polygon |>
+  mutate(region = str_squish(str_to_lower(region)))
+
+states_sf <- states_sf |>
+  mutate(name = str_squish(str_to_lower(name)))
+
+polisci_data <- polisci_data |>
+  mutate(state = str_squish(str_to_lower(state)))
+
+# Join first, then filter to contiguous states
+contiguous_states <- c("alabama", "arizona", "arkansas", "california", "colorado", 
+                      "connecticut", "delaware", "florida", "georgia", "idaho", 
+                      "illinois", "indiana", "iowa", "kansas", "kentucky", 
+                      "louisiana", "maine", "maryland", "massachusetts", "michigan", 
+                      "minnesota", "mississippi", "missouri", "montana", "nebraska", 
+                      "nevada", "new hampshire", "new jersey", "new mexico", 
+                      "new york", "north carolina", "north dakota", "ohio", 
+                      "oklahoma", "oregon", "pennsylvania", "rhode island", 
+                      "south carolina", "south dakota", "tennessee", "texas", 
+                      "utah", "vermont", "virginia", "washington", "west virginia", 
+                      "wisconsin", "wyoming")
+
+# Join all data first
+states_polygon_merged <- states_polygon |>
+  left_join(polisci_data, by = c("region" = "state")) |>
+  filter(region %in% contiguous_states)  # Filter AFTER join
+
+# Now check - should be 48
+n_distinct(states_polygon_merged$region)
+```
+
+```{r}
+# Now we can merge data sets together for the static and the interactive plots
+
+# Merge with states_polygon (static)
+states_polygon_merged <- states_polygon |>
+  left_join(polisci_data, by = c("region" = "state")) |>
+  filter(region %in% contiguous_states)
+
+# Check that merge worked for 48 contiguous states
+n_distinct(states_polygon_merged$region)  # Should be 48
+unique(states_polygon_merged$region) 
+
+# Merge with states_sf (static or interactive)
+states_sf_merged <- states_sf |>
+  left_join(polisci_data, by = c("name" = "state")) |>
+  filter(name %in% contiguous_states)
+
+# Check that merge worked for 48 contiguous states
+n_distinct(states_sf_merged$name)  
+unique(states_sf_merged$name) 
+
+
+```
+
+
+Numeric variable (static plot):
+
+```{r}
+ggplot() +
+  geom_polygon(data = states_polygon_merged, 
+               aes(x = long, y = lat, group = group, 
+                   fill = carfatal07),
+               color = "white", size = 0.2) +
+  scale_fill_gradient(name = "Car Fatalities (2007)",
+                     low = "#fee5d9", high = "#a50f15",
+                     na.value = "grey90") +
+  coord_map() +
+  theme_minimal()
+
+```
+**What the static map reveals:** The deep red clusters across the South – Mississippi, West Virginia, Alabama, and South Carolina – tell a troubling story. These states consistently show fatality rates above 20 per 100,000 people. In contrast, the Northeast and Upper Midwest appear in lighter shades, with Massachusetts and Minnesota showing rates below 10. The pattern suggests a strong rural-urban divide: states with larger rural populations and longer driving distances tend to have higher death rates. Montana and Wyoming are notable exceptions – despite being rural, their fatality rates are moderate, likely due to lower population density and different highway designs.
+
+*Data source: poliscidata package (2007 car fatality rates per 100,000 population)*
+
+
+Numeric variable (interactive plot):
+
+```{r}
+# it's okay to skip a legend here
+pal_numeric <- colorNumeric(
+  palette = "Reds",
+  domain = states_sf_merged$carfatal07
+)
+
+leaflet(states_sf_merged) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal_numeric(carfatal07),
+    weight = 1,
+    opacity = 1,
+    color = "white",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "#666",
+      fillOpacity = 0.9
+    ),
+    label = ~paste0(name, ": ", round(carfatal07, 1), " fatalities/100k"),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "12px",
+      direction = "auto"
+    )
+  )
+
+```
+
+**Interactive exploration:** Hover over any state to see its exact fatality rate. Notice how the gradient intensifies as you move from the Northeast down through Appalachia into the Deep South. You can also see how states along the same interstate corridors (like I-95 or I-40) sometimes have dramatically different safety records depending on which side of a state line you're on.
+
+# Part 3: The Political Geography of America
+
+## 3.1 Cook Partisan Voting Index: A Categorical View
+
+The Cook PVI measures how strongly a state leans Democratic or Republican compared to the national average. Rather than treating politics as a binary (red vs. blue), the index reveals degrees of competition. A rating of "Even" means the state is a true battleground – the kind of place where presidential elections are decided.
+
+Categorical variable (static plot):
+
+```{r}
+# be really careful with matching color order to factor level order
+states_polygon_merged <- states_polygon_merged |>
+  mutate(cook_cat = factor(cook_index3, 
+                          levels = c("More Dem", 
+                                    "Even", 
+                                    "More Rep"),
+                          ordered = TRUE))
+
+ggplot() +
+  geom_polygon(data = states_polygon_merged, 
+               aes(x = long, y = lat, group = group, 
+                   fill = cook_cat),
+               color = "white", size = 0.2) +
+  scale_fill_manual(name = "Cook PVI",
+                    values = c("More Dem" = "#08519c",
+                              "Even" = "#f7f7f7",
+                              "More Rep" = "#cb181d"),
+                    na.value = "grey90",
+                    drop = FALSE) +
+  coord_map() +
+  theme_minimal()
+
+```
+**What the static map reveals:** The pattern is striking. Democratic-leaning states cluster along the Pacific Coast (California, Oregon, Washington), the Northeast corridor (New York, Massachusetts, Connecticut), and around the Great Lakes (Illinois, Michigan). Republican-leaning states dominate the South, the Plains, and the Mountain West. But the most interesting category is "Even" – these battleground states (Colorado, Florida, Iowa, Nevada, New Hampshire, Ohio, Pennsylvania, Virginia, Wisconsin) form a geographic belt across the middle of the country. This is where presidential campaigns spend millions of dollars for a reason.
+
+*Data source: poliscidata package (Cook Partisan Voting Index)*
+
+```{r}
+polisci_data|>
+  count(cook_index3)
+```
+
+Categorical variable (interactive plot):
+
+```{r}
+# may use colorFactor() here
+
+states_sf_merged <- states_sf_merged |>
+  mutate(cook_cat = factor(cook_index3, 
+                          levels = c("More Dem", 
+                                    "Even", 
+                                    "More Rep"),
+                          ordered = TRUE))
+
+# Define color palette matching the order
+cat_colors <- c("More Dem" = "#08519c",
+                              "Even" = "#f7f7f7",
+                              "More Rep" = "#cb181d")
+
+pal_categorical <- colorFactor(
+  palette = cat_colors,
+  domain = states_sf_merged$cook_cat,
+  ordered = TRUE
+)
+
+leaflet(states_sf_merged) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal_categorical(cook_cat),
+    weight = 1,
+    opacity = 1,
+    color = "white",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "#666",
+      fillOpacity = 0.9
+    ),
+    label = ~paste0(name, ": ", cook_index3),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "12px",
+      direction = "auto"
+    )
+  ) |> addLegend(pal = pal_categorical, values = ~cook_cat, title = "Cook PVI")
+
+```
+**Interactive exploration:** Click around the map to see how the political landscape shifts. Notice that "Even" states aren't random – they form a corridor from Virginia to Colorado. Also observe how some states we think of as reliably partisan actually have competitive scores: Texas leans Republican but not as strongly as Oklahoma or Wyoming.
+
+# Part 4: What We've Learned
+
+These two maps, viewed together, reveal an America that isn't as divided as cable news might suggest – at least not on every issue.
+
+**On road safety:** Geography and infrastructure matter more than politics. The South's higher fatality rates cut across partisan lines. Red Mississippi and blue New Mexico both appear in the highest risk category. This suggests that traffic safety is a genuinely nonpartisan issue – one where federal and state governments could collaborate without ideological battles.
+
+**On political leanings:** Our mental maps are largely correct but miss important nuance. The coasts are indeed blue, the interior is mostly red, but the battleground belt of "Even" states explains why presidential elections are never landslides anymore. These 9 competitive states contain a diverse mix of urban, suburban, and rural voters – exactly the kind of coalition that decides national elections.
+
+**The bigger picture:** What makes maps powerful isn't just the data they display – it's the questions they provoke. Why does the South have worse road safety outcomes? Why are battleground states clustered in a geographic belt? These visualizations don't provide final answers, but they give us a starting point for asking better questions.
+
+
+*All maps created with R using data from the poliscidata package. Population density correction based on Wikipedia data. Interactive maps powered by leaflet.*

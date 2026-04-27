@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lea Komba">
 
-<title>About – LK238.github.io</title>
+<title>Netflix Text Analysis – Lea Komba</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,10 +73,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-251603f34fb100524ce6c94bd8510ba7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-afa1767ab894c633a6efdfa517d42c1b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-251603f34fb100524ce6c94bd8510ba7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,7 +113,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">LK238.github.io</span>
+    <span class="navbar-title">Lea Komba</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -133,34 +300,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Netflix Text Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Projects.html"> 
+<span class="menu-text">Iteractive maps</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<div class="quarto-title-block"><div><h1 class="title">Netflix Text Analysis</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lea Komba </p>
+          </div>
+  </div>
     
   
     
@@ -171,19 +350,760 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>About this site</p>
+<p>#Introduction: What Stories Is Netflix Telling Us?</p>
+<p>Netflix has revolutionized how we consume entertainment, but have you ever wondered how the streaming giant describes its content? The words chosen to summarize movies and TV shows aren’t random—they’re carefully crafted to attract specific audiences while accurately representing the content.</p>
+<p>In this analysis, I dive deep into Netflix’s title descriptions to uncover:</p>
+<p><em>What words appear most frequently?</em></p>
+<p><em>How does sentiment differ across content?</em></p>
+<p><em>Do TV ratings (TV-MA, TV-14, PG, etc.) use different language?</em></p>
+<p><em>What happens when negation words like “not” or “never” flip the meaning?</em></p>
+<p>Let’s explore what 8,000+ Netflix descriptions reveal about how we talk about entertainment.</p>
+<p>#Uploading the data to the environment</p>
+<p>#Data tyding</p>
+<p>Just a for fun: By running this code we can see the number of movies vs TV Shows that we have in the data. Later on in this project I will be looking at specific show/movie descriptions, however I will look at them combined and not differentiate if some words are for movie or TV show descriptions. Here we have 6131 movies and 2676 TV Shows.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Netflix_Data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C://Users//komba1//Downloads//Leas data set.csv"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 8807 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (11): show_id, type, title, director, cast, country, date_added, rating,...
+dbl  (1): release_year
 
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Netflix_Data<span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(type)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  type        n
+  &lt;chr&gt;   &lt;int&gt;
+1 Movie    6131
+2 TV Show  2676</code></pre>
+</div>
+</div>
+<p>#Data tidying</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, description, <span class="at">token =</span> <span class="st">"words"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>#The Big Picture</p>
+<p>Most Common Words in Netflix Descriptions Before diving into sentiment, let’s look at the words Netflix uses most frequently to describe its content:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>(<span class="at">source =</span> <span class="st">"smart"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(word, n), n)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(word)`</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="This barplot shows the distribution of the most common words in the Netflix dataset. In the x-axis we have the number of times these words appear ranging from 0 to 800, and the y-axis represents the top 20 most common words, ranging from life(most common) to father(least common)." width="672"></p>
+<figcaption>The top 20 most common words in the descriptions of Netflix shows and movies have amongst them words such as life, deatch, father, love, woman, friends, etc. We can see here that the most common word in this very simple analysis is life , and the least common word out of the top 20 is father.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>#The Emotional Palette</p>
+<p>Positive vs.&nbsp;Negative Words Using the Bing sentiment lexicon, I classified words as positive or negative to see the emotional balance:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"afinn"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,477 × 2
+   word       value
+   &lt;chr&gt;      &lt;dbl&gt;
+ 1 abandon       -2
+ 2 abandoned     -2
+ 3 abandons      -2
+ 4 abducted      -2
+ 5 abduction     -2
+ 6 abductions    -2
+ 7 abhor         -3
+ 8 abhorred      -3
+ 9 abhorrent     -3
+10 abhors        -3
+# ℹ 2,467 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"nrc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,872 × 2
+   word        sentiment
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 abacus      trust    
+ 2 abandon     fear     
+ 3 abandon     negative 
+ 4 abandon     sadness  
+ 5 abandoned   anger    
+ 6 abandoned   fear     
+ 7 abandoned   negative 
+ 8 abandoned   sadness  
+ 9 abandonment anger    
+10 abandonment fear     
+# ℹ 13,862 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"bing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,786 × 2
+   word        sentiment
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 2-faces     negative 
+ 2 abnormal    negative 
+ 3 abolish     negative 
+ 4 abominable  negative 
+ 5 abominably  negative 
+ 6 abominate   negative 
+ 7 abomination negative 
+ 8 abort       negative 
+ 9 aborted     negative 
+10 aborts      negative 
+# ℹ 6,776 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bing_sentiments <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"bing"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span>   </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(word)`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in inner_join(tidy_netflix, bing_sentiments): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 115374 of `x` matches multiple rows in `y`.
+ℹ Row 504 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  "many-to-many"` to silence this warning.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  sentiment     n
+  &lt;chr&gt;     &lt;int&gt;
+1 negative  11465
+2 positive   7919</code></pre>
+</div>
+</div>
+<p>Here we can see that from the most common words in this dataset, 11465 have a negative sentiment and 7919 have a positive sentiment.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This barplot shows the distribution of the most common words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the number of times these words appear ranging from 0 to 200 (negative sentiment) and 0 to 500 (positive sentiment), and the y-axis represents the top 10 most common words, ranging from most common to least common; and the graph is wrapped based on the sentiment."</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments,<span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(word, n), <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span>  </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> sentiment, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(word)`</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>From the top 20 most common words in the descriptions of Netflix shows and movies, we split them in half showing the top 10 words with negative or positive sentiment. Words such as murder, mysterious and crime have negative sentiment, whreas words like best, work and love have positive sentiment. From the words with negative sentiment, murder is the one that shows up the most whereas dangerous shows up the least. For words with positive sentiment, love is the one that appears more often and modern appears the least. Based on the range on the Y-axis for this plot, we can observe something interesting: the fact that the graph that represents negativ sentiment has a y-axis ranging from 0 - 200 while the graph with positive sentiment ranges from 0 - 500, can tell us that overall in this data set, words with positive sentiment appear more often.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>According to what we can see in this wordclout , these are the words that are more often mentioned in descriptions of netflix shows. The larger the word size, the more often it appears.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">##whch ones are positive and which ones are negative?</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'reshape2'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tidyr':
+
+    smiths</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">acast</span>(word <span class="sc">~</span> sentiment, <span class="at">value.var =</span> <span class="st">"n"</span>, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">comparison.cloud</span>(<span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">6</span>, <span class="st">"Dark2"</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max.words =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(word)`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in inner_join(., get_sentiments("bing")): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 115374 of `x` matches multiple rows in `y`.
+ℹ Row 504 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  "many-to-many"` to silence this warning.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>#Beyond Single Words</p>
+<p>The Power of Bigrams Single words can be misleading. For example, “love” might appear in “love story” (positive) or “love gone wrong” (negative). That’s why I analyzed bigrams—two-word combinations to capture context:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>netflix_ngram <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bigram <span class="sc">!=</span> <span class="st">"NA"</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>netflix_ngram</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 204,283 × 12
+   show_id type  title     director cast  country date_added release_year rating
+   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt; 
+ 1 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 2 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 3 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 4 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 5 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 6 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 7 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 8 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+ 9 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+10 s1      Movie Dick Joh… Kirsten… &lt;NA&gt;  United… September…         2020 PG-13 
+# ℹ 204,273 more rows
+# ℹ 3 more variables: duration &lt;chr&gt;, listed_in &lt;chr&gt;, bigram &lt;chr&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(bigram, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 109,649 × 2
+   bigram      n
+   &lt;chr&gt;   &lt;int&gt;
+ 1 in a      708
+ 2 in this   695
+ 3 in the    667
+ 4 of the    666
+ 5 of a      569
+ 6 with a    486
+ 7 on a      460
+ 8 when a    421
+ 9 a young   408
+10 to the    382
+# ℹ 109,639 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Let's remove stop words</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_filtered <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_filtered </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 42,303 × 3
+   word1       word2       n
+   &lt;chr&gt;       &lt;chr&gt;   &lt;int&gt;
+ 1 true        story      57
+ 2 world       war        53
+ 3 los         angeles    46
+ 4 war         ii         45
+ 5 york        city       39
+ 6 documentary series     36
+ 7 martial     arts       36
+ 8 road        trip       36
+ 9 social      media      36
+10 serial      killer     34
+# ℹ 42,293 more rows</code></pre>
+</div>
+</div>
+<p>#visualizing bigrams in a network</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "From the most common paired words we can see in this network plot, how often and which words are paired in this dataset. The largest network, is the one that connects crime-&gt;organized to family-&gt;life_&gt;changing."</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This network plot shows the connection between paired words, showing of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># filter for only relatively common combinations</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>bigram_graph <span class="ot">&lt;-</span> netflix_bigrams_filtered <span class="sc">|&gt;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph_from_data_frame</span>()</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>bigram_graph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>IGRAPH 6b6eb5e DN-- 121 79 -- 
++ attr: name (v/c), n (e/n)
++ edges from 6b6eb5e (vertex names):
+ [1] true       -&gt;story    world      -&gt;war      los        -&gt;angeles 
+ [4] war        -&gt;ii       york       -&gt;city     documentary-&gt;series  
+ [7] martial    -&gt;arts     road       -&gt;trip     social     -&gt;media   
+[10] serial     -&gt;killer   reality    -&gt;series   real       -&gt;life    
+[13] hong       -&gt;kong     true       -&gt;events   civil      -&gt;war     
+[16] middle     -&gt;aged     police     -&gt;officer  comedy     -&gt;special 
+[19] hip        -&gt;hop      documentary-&gt;explores true       -&gt;love    
+[22] college    -&gt;student  love       -&gt;triangle modern     -&gt;day     
++ ... omitted several edges</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggraph to convert into a network plot</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2017</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(bigram_graph, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># polish the graph</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2020</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">type =</span> <span class="st">"closed"</span>, <span class="at">length =</span> <span class="fu">unit</span>(.<span class="dv">15</span>, <span class="st">"inches"</span>))</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(bigram_graph, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> n), <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">arrow =</span> a, <span class="at">end_cap =</span> <span class="fu">circle</span>(.<span class="dv">07</span>, <span class="st">'inches'</span>)) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">color =</span> <span class="st">"lightpink"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>#Bigrams sentiments</p>
+<p>Now lets look at the context in which these combination of words appear so that we can see if they actually contribute to a negative or positive sentiment.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_afinn <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add AFINN scores</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word1"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word1 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word2 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create combined sentiment columns</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace NA with 0</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word1 =</span> <span class="fu">replace_na</span>(afinn_word1, <span class="dv">0</span>),</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word2 =</span> <span class="fu">replace_na</span>(afinn_word2, <span class="dv">0</span>),</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combined scores</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_sum =</span> afinn_word1 <span class="sc">+</span> afinn_word2,</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sentiment category based on combined score</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_sentiment_afinn =</span> <span class="fu">case_when</span>(</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"very positive"</span>,</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"positive"</span>,</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"neutral"</span>,</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"negative"</span>,</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">"very negative"</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_afinn <span class="sc">|&gt;</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word1, word2, n, afinn_word1, afinn_word2, </span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>         combined_sum, combined_sentiment_afinn) <span class="sc">|&gt;</span></span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(afinn_word1 <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">|</span> afinn_word2 <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 7
+   word1 word2     n afinn_word1 afinn_word2 combined_sum combined_sentiment_a…¹
+   &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                 
+ 1 true  story    57           2           0            2 positive              
+ 2 world war      53           0          -2           -2 negative              
+ 3 war   ii       45          -2           0           -2 negative              
+ 4 true  even…    27           2           0            2 positive              
+ 5 civil war      26           0          -2           -2 negative              
+ 6 come… spec…    24           1           0            1 positive              
+ 7 true  love     23           2           3            5 very positive         
+ 8 love  tria…    21           3           0            3 very positive         
+ 9 join  forc…    18           1           0            1 positive              
+10 award winn…    17           3           4            7 very positive         
+11 free  spir…    17           1           2            3 very positive         
+12 orga… crime    14           0          -3           -3 negative              
+13 car   acci…    13           0          -2           -2 negative              
+14 love  life     13           3           0            3 very positive         
+15 resc… miss…    13           2           0            2 positive              
+16 true  crime    13           2          -3           -1 negative              
+17 top   secr…    12           2           0            2 positive              
+18 come… seri…    11           1           0            1 positive              
+19 fun   lovi…    11           4           2            6 very positive         
+20 war   torn     11          -2          -2           -4 negative              
+# ℹ abbreviated name: ¹​combined_sentiment_afinn</code></pre>
+</div>
+</div>
+<p>#The Negation Effect: When “Not” Changes Everything</p>
+<p>One of the most fascinating aspects of language is how negation words flip meaning. “Good” is positive, but “not good” is negative. Conversely, “bad” is negative, but “not bad” is positive.</p>
+<p>Let’s see how Netflix uses negation:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>netflix_afinn <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>bigrams_separated <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2))</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>bigrams_separated <span class="sc">|&gt;</span> <span class="fu">filter</span>(word1 <span class="sc">==</span> <span class="st">"not"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 49 × 3
+   word1 word2       n
+   &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;
+ 1 not   be         11
+ 2 not   to          8
+ 3 not   knowing     7
+ 4 not   so          6
+ 5 not   the         5
+ 6 not   all         3
+ 7 not   just        3
+ 8 not   as          2
+ 9 not   even        2
+10 not   have        2
+# ℹ 39 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>not_words <span class="ot">&lt;-</span> bigrams_separated <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">==</span> <span class="st">"not"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(netflix_afinn, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">word2 =</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>not_words</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  word1 word2       n value
+  &lt;chr&gt; &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
+1 not   accept      1     1
+2 not   admit       1    -1
+3 not   alone       1    -2
+4 not   easy        1     1
+5 not   solving     1     1</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "From the most common words that are often accompained by a negation word (no, not, never, without), we can see that the words that come after the negation word never, when combined have a more negative sentiment, whereas words that come after the negation word without, often tend to a slighty positive sentiment."</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This barplot shows the distribution of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># An example of expanding the list of negation words</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>negation_words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"not"</span>, <span class="st">"no"</span>, <span class="st">"never"</span>, <span class="st">"without"</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>negated_words <span class="ot">&lt;-</span> bigrams_separated <span class="sc">|&gt;</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">%in%</span> negation_words) <span class="sc">|&gt;</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(netflix_afinn, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">word2 =</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>negated_words</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 4
+   word1   word2         n value
+   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt;
+ 1 no      nonsense      5    -2
+ 2 no      matter        3     1
+ 3 no      prisoners     2    -2
+ 4 never   dull          1    -2
+ 5 never   failing       1    -2
+ 6 never   missed        1    -2
+ 7 never   suspects      1    -1
+ 8 never   won           1     3
+ 9 no      easy          1     1
+10 no      help          1     2
+11 no      honor         1     2
+12 no      interest      1     1
+13 no      justice       1     2
+14 not     accept        1     1
+15 not     admit         1    -1
+16 not     alone         1    -2
+17 not     easy          1     1
+18 not     solving       1     1
+19 without justice       1     2
+20 without prospects     1     1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>negated_words <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">contribution =</span> n <span class="sc">*</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(contribution))) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word1) <span class="sc">|&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="fu">abs</span>(contribution), <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word2 =</span> <span class="fu">reorder</span>(word2, contribution)) <span class="sc">|&gt;</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(n <span class="sc">*</span> value, word2, <span class="at">fill =</span> n <span class="sc">*</span> value <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> word1, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sentiment value * number of occurrences"</span>,</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Words preceded by negation term"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>#Rating Matters: How Language Differs by TV Rating</p>
+<p>Now for the most revealing part of my analysis: How does language change across different TV ratings?</p>
+<p>I filtered out duration-based ratings (like “90 min”) and focused on content ratings: TV-MA, TV-14, TV-PG, R and PG-13.</p>
+<p>#Bigrams: Word Pairs by Rating</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's create a bigram dataset with ratings and sentiment</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>bigrams_with_ratings <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2)) <span class="sc">|&gt;</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word <span class="sc">&amp;</span> <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add sentiment for both words using AFINN</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word1"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word1 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word2 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate combined sentiment</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word1 =</span> <span class="fu">replace_na</span>(afinn_word1, <span class="dv">0</span>),</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word2 =</span> <span class="fu">replace_na</span>(afinn_word2, <span class="dv">0</span>),</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_score =</span> afinn_word1 <span class="sc">+</span> afinn_word2,</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">bigram_sentiment =</span> <span class="fu">case_when</span>(</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>      combined_score <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"positive"</span>,</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>      combined_score <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"negative"</span>,</span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"neutral"</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Now count bigrams by rating and sentiment</span></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>bigrams_by_rating <span class="ot">&lt;-</span> bigrams_with_ratings <span class="sc">|&gt;</span></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, bigram, bigram_sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating) <span class="sc">|&gt;</span></span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span>  <span class="co"># Top 5 bigrams per rating</span></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>bigrams_by_rating <span class="sc">|&gt;</span></span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(bigram, n), <span class="at">y =</span> n, <span class="at">fill =</span> bigram_sentiment)) <span class="sc">+</span></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> rating, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"positive"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, </span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"negative"</span> <span class="ot">=</span> <span class="st">"darkred"</span>, </span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"neutral"</span> <span class="ot">=</span> <span class="st">"gray50"</span>)) <span class="sc">+</span></span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Most Common Bigrams by TV Rating"</span>,</span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Colored by combined AFINN sentiment score"</span>,</span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Bigrams"</span>, </span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Sentiment"</span></span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>When analysing how the paired words are distributed across the selected TV rating types, we can see that for R and TV-PG the TV-Shows or Movies have most often paired words with negative or neutral sentiment, whereas for PG-13 and TV-14 we see most often neutral themes.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>#Unigrams: Single Words by Rating</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments, <span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating) <span class="sc">|&gt;</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span>  <span class="co"># Top 5 words per rating</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(word, n), <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> rating, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Most Common Words by TV Rating"</span>,</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Words"</span>, </span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Sentiment"</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(word)`</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>When analysing how single words are distributed across the selected TV rating types, we can see that for R, TV-MA and TV-14 the TV-Shows or Movies have most often single words with negative sentiment, whereas for PG-13 and TV-PG we see most often positive sentiment</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>#Negation Patterns Across Ratings Finally, let’s see how negation words behave differently across content ratings:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>negated_words_by_rating <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2)) <span class="sc">|&gt;</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">%in%</span> negation_words) <span class="sc">|&gt;</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, word1, word2, value, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">contribution =</span> n <span class="sc">*</span> value)</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>negated_words_by_rating <span class="sc">|&gt;</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating, word1) <span class="sc">|&gt;</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="fu">abs</span>(contribution), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_label =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep =</span> <span class="st">" → "</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rating, <span class="at">y =</span> <span class="fu">fct_reorder</span>(word_label, contribution), <span class="at">fill =</span> contribution)) <span class="sc">+</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">low =</span> <span class="st">"darkred"</span>, </span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">mid =</span> <span class="st">"white"</span>, </span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">high =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">name =</span> <span class="st">"Contribution"</span></span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Negation Word Pairs Across Ratings"</span>,</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Green = positive context after negation, Red = negative context after negation"</span>,</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Rating"</span>, </span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Negation → Word pairs"</span></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="about_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>#What have we Learned About Netflix’s Language?</p>
+<p>Based on this comprehensive analysis of over 8,000 Netflix titles, we can conclude that Netflix’s description language reveals a sophisticated content strategy that balances emotional appeal with audience targeting. While the raw counts show more negative words (11,465) than positive words (7,919) overall, positive terms like “love,” “best,” and “work” appear more frequently.</p>
+<p>The most revealing finding here is how language shifts dramatically by content rating: mature-rated content (R, TV-MA, TV-14) relies heavily on negative sentiment words associated with crime, violence, and psychological tension, while youth-oriented ratings (PG-13, TV-PG) feature more positive and neutral language centered on friendship and adventure. In addition the analysis of negation patterns further demonstrates that words following “never” tend toward negative sentiment while those after “without” lean positive, showing how Netflix uses context to create nuanced descriptions that manage viewer expectations.</p>
+<p>Ultimately, these patterns reveal that Netflix’s descriptions are carefully crafted linguistic tools that not only summarize content but strategically signal genre conventions, emotional journeys, and appropriate audiences through deliberate word choices and contextual framing.</p>
+
+
+<!-- -->
 
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -252,6 +1172,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -581,7 +1552,452 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Netflix Text Analysis"</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Lea Komba"</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>#Introduction: What Stories Is Netflix Telling Us?</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>Netflix has revolutionized how we consume entertainment, but have you ever wondered how the streaming giant describes its content? The words chosen to summarize movies and TV shows aren't random—they're carefully crafted to attract specific audiences while accurately representing the content.</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>In this analysis, I dive deep into Netflix's title descriptions to uncover:</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>*What words appear most frequently?*</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>*How does sentiment differ across content?*</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>*Do TV ratings (TV-MA, TV-14, PG, etc.) use different language?*</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>*What happens when negation words like "not" or "never" flip the meaning?*</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>Let's explore what 8,000+ Netflix descriptions reveal about how we talk about entertainment.</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>#Uploading the data to the environment</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: FALSE</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textdata)</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud)</span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gutenbergr)</span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RCurl)</span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>Netflix_Data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C://Users//komba1//Downloads//Leas data set.csv"</span>) </span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>#Data tyding</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>Just a for fun: By running this code we can see the number of movies vs TV Shows that we have in the data. Later on in this project I will be looking at specific show/movie descriptions, however I will look at them combined and not differentiate if some words are for movie or TV show descriptions. Here we have 6131 movies and 2676 TV Shows.</span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>Netflix_Data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C://Users//komba1//Downloads//Leas data set.csv"</span>) </span>
+<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a>Netflix_Data<span class="sc">|&gt;</span></span>
+<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(type)</span>
+<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a>#Data tidying</span>
+<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, description, <span class="at">token =</span> <span class="st">"words"</span>)</span>
+<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a>#The Big Picture</span>
+<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-74"><a href="#cb49-74" aria-hidden="true" tabindex="-1"></a>Most Common Words in Netflix Descriptions Before diving into sentiment, let's look at the words Netflix uses most frequently to describe its content:</span>
+<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "The top 20 most common words in the descriptions of Netflix shows and movies have amongst them words such as life, deatch, father, love, woman, friends, etc. We can see here that the most common word in this very simple analysis is life , and the least common word out of the top 20 is father."</span></span>
+<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This barplot shows the distribution of the most common words in the Netflix dataset. In the x-axis we have the number of times these words appear ranging from 0 to 800, and the y-axis represents the top 20 most common words, ranging from life(most common) to father(least common)."</span></span>
+<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>(<span class="at">source =</span> <span class="st">"smart"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-86"><a href="#cb49-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-87"><a href="#cb49-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">fct_reorder</span>(word, n), n)) <span class="sc">+</span></span>
+<span id="cb49-88"><a href="#cb49-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-92"><a href="#cb49-92" aria-hidden="true" tabindex="-1"></a>#The Emotional Palette</span>
+<span id="cb49-93"><a href="#cb49-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-94"><a href="#cb49-94" aria-hidden="true" tabindex="-1"></a>Positive vs. Negative Words Using the Bing sentiment lexicon, I classified words as positive or negative to see the emotional balance:</span>
+<span id="cb49-95"><a href="#cb49-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-98"><a href="#cb49-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-99"><a href="#cb49-99" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"afinn"</span>)</span>
+<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"nrc"</span>)</span>
+<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"bing"</span>)</span>
+<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a>bing_sentiments <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="at">lexicon =</span> <span class="st">"bing"</span>)</span>
+<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-105"><a href="#cb49-105" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span>   </span>
+<span id="cb49-106"><a href="#cb49-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments) <span class="sc">|&gt;</span></span>
+<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment)</span>
+<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a>Here we can see that from the most common words in this dataset, 11465 have a negative sentiment and 7919 have a positive sentiment.</span>
+<span id="cb49-111"><a href="#cb49-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-114"><a href="#cb49-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-115"><a href="#cb49-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "From the top 20 most common words in the descriptions of Netflix shows and movies, we split them in half showing the top 10 words with negative or positive sentiment. Words such as murder, mysterious and crime have negative sentiment, whreas words like best, work and love have positive sentiment. From the words with negative sentiment, murder is the one that shows up the most whereas dangerous shows up the least. For words with positive sentiment, love is the  one that appears more often and modern appears the least. Based on the range on the Y-axis for this plot, we can observe something interesting: the fact that the graph that represents negativ sentiment has a y-axis ranging from 0 - 200 while the graph with positive sentiment ranges from 0 - 500, can tell us that overall in this data set, words with positive sentiment appear more often."</span></span>
+<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This barplot shows the distribution of the most common words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the number of times these words appear ranging from 0 to 200 (negative sentiment) and 0 to 500 (positive sentiment), and the y-axis represents the top 10 most common words, ranging from most common to least common; and the graph is wrapped based on the sentiment."</span></span>
+<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-119"><a href="#cb49-119" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb49-120"><a href="#cb49-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments,<span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(word, n), <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb49-126"><a href="#cb49-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span>  </span>
+<span id="cb49-127"><a href="#cb49-127" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> sentiment, <span class="at">scales =</span> <span class="st">"free"</span>)</span>
+<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-130"><a href="#cb49-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-131"><a href="#cb49-131" aria-hidden="true" tabindex="-1"></a>According to what we can see in this wordclout , these are the words that are more often mentioned in descriptions of netflix shows. The larger the word size, the more often it appears.</span>
+<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-135"><a href="#cb49-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-136"><a href="#cb49-136" aria-hidden="true" tabindex="-1"></a><span class="do">##whch ones are positive and which ones are negative?</span></span>
+<span id="cb49-137"><a href="#cb49-137" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">%&gt;%</span></span>
+<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">acast</span>(word <span class="sc">~</span> sentiment, <span class="at">value.var =</span> <span class="st">"n"</span>, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">comparison.cloud</span>(<span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">6</span>, <span class="st">"Dark2"</span>),</span>
+<span id="cb49-144"><a href="#cb49-144" aria-hidden="true" tabindex="-1"></a>                   <span class="at">max.words =</span> <span class="dv">100</span>)</span>
+<span id="cb49-145"><a href="#cb49-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-146"><a href="#cb49-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-147"><a href="#cb49-147" aria-hidden="true" tabindex="-1"></a>#Beyond Single Words</span>
+<span id="cb49-148"><a href="#cb49-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-149"><a href="#cb49-149" aria-hidden="true" tabindex="-1"></a>The Power of Bigrams Single words can be misleading. For example, "love" might appear in "love story" (positive) or "love gone wrong" (negative). That's why I analyzed bigrams—two-word combinations to capture context:</span>
+<span id="cb49-150"><a href="#cb49-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-153"><a href="#cb49-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-154"><a href="#cb49-154" aria-hidden="true" tabindex="-1"></a>netflix_ngram <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb49-155"><a href="#cb49-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-156"><a href="#cb49-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bigram <span class="sc">!=</span> <span class="st">"NA"</span>)</span>
+<span id="cb49-157"><a href="#cb49-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-158"><a href="#cb49-158" aria-hidden="true" tabindex="-1"></a>netflix_ngram</span>
+<span id="cb49-159"><a href="#cb49-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-160"><a href="#cb49-160" aria-hidden="true" tabindex="-1"></a>netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb49-161"><a href="#cb49-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(bigram, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-162"><a href="#cb49-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-163"><a href="#cb49-163" aria-hidden="true" tabindex="-1"></a><span class="do">##Let's remove stop words</span></span>
+<span id="cb49-164"><a href="#cb49-164" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_filtered <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb49-165"><a href="#cb49-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-166"><a href="#cb49-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb49-167"><a href="#cb49-167" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb49-168"><a href="#cb49-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-169"><a href="#cb49-169" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_filtered </span>
+<span id="cb49-170"><a href="#cb49-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-171"><a href="#cb49-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-172"><a href="#cb49-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-173"><a href="#cb49-173" aria-hidden="true" tabindex="-1"></a>#visualizing bigrams in a network</span>
+<span id="cb49-174"><a href="#cb49-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-177"><a href="#cb49-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-178"><a href="#cb49-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: FALSE</span></span>
+<span id="cb49-179"><a href="#cb49-179" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: FALSE</span></span>
+<span id="cb49-180"><a href="#cb49-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-181"><a href="#cb49-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "From the most common paired words we can see in this network plot, how often and which words are paired in this dataset. The largest network, is the one that connects crime-&gt;organized to family-&gt;life_&gt;changing."</span></span>
+<span id="cb49-182"><a href="#cb49-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-183"><a href="#cb49-183" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This network plot shows the connection between paired words, showing of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "</span></span>
+<span id="cb49-184"><a href="#cb49-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-185"><a href="#cb49-185" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb49-186"><a href="#cb49-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-187"><a href="#cb49-187" aria-hidden="true" tabindex="-1"></a><span class="co"># filter for only relatively common combinations</span></span>
+<span id="cb49-188"><a href="#cb49-188" aria-hidden="true" tabindex="-1"></a>bigram_graph <span class="ot">&lt;-</span> netflix_bigrams_filtered <span class="sc">|&gt;</span></span>
+<span id="cb49-189"><a href="#cb49-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-190"><a href="#cb49-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph_from_data_frame</span>()</span>
+<span id="cb49-191"><a href="#cb49-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-192"><a href="#cb49-192" aria-hidden="true" tabindex="-1"></a>bigram_graph</span>
+<span id="cb49-193"><a href="#cb49-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-194"><a href="#cb49-194" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggraph to convert into a network plot</span></span>
+<span id="cb49-195"><a href="#cb49-195" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb49-196"><a href="#cb49-196" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2017</span>)</span>
+<span id="cb49-197"><a href="#cb49-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-198"><a href="#cb49-198" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(bigram_graph, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb49-199"><a href="#cb49-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span></span>
+<span id="cb49-200"><a href="#cb49-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb49-201"><a href="#cb49-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb49-202"><a href="#cb49-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-203"><a href="#cb49-203" aria-hidden="true" tabindex="-1"></a><span class="co"># polish the graph</span></span>
+<span id="cb49-204"><a href="#cb49-204" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2020</span>)</span>
+<span id="cb49-205"><a href="#cb49-205" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">type =</span> <span class="st">"closed"</span>, <span class="at">length =</span> <span class="fu">unit</span>(.<span class="dv">15</span>, <span class="st">"inches"</span>))</span>
+<span id="cb49-206"><a href="#cb49-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-207"><a href="#cb49-207" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(bigram_graph, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb49-208"><a href="#cb49-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> n), <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb49-209"><a href="#cb49-209" aria-hidden="true" tabindex="-1"></a>                 <span class="at">arrow =</span> a, <span class="at">end_cap =</span> <span class="fu">circle</span>(.<span class="dv">07</span>, <span class="st">'inches'</span>)) <span class="sc">+</span></span>
+<span id="cb49-210"><a href="#cb49-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">color =</span> <span class="st">"lightpink"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb49-211"><a href="#cb49-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-212"><a href="#cb49-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb49-213"><a href="#cb49-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-214"><a href="#cb49-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-215"><a href="#cb49-215" aria-hidden="true" tabindex="-1"></a>#Bigrams sentiments </span>
+<span id="cb49-216"><a href="#cb49-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-217"><a href="#cb49-217" aria-hidden="true" tabindex="-1"></a>Now lets look at the context in which these combination of words appear so that we can see if they actually contribute to a negative or positive sentiment.</span>
+<span id="cb49-218"><a href="#cb49-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-221"><a href="#cb49-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-222"><a href="#cb49-222" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_afinn <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb49-223"><a href="#cb49-223" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-224"><a href="#cb49-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word,</span>
+<span id="cb49-225"><a href="#cb49-225" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb49-226"><a href="#cb49-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-227"><a href="#cb49-227" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-228"><a href="#cb49-228" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add AFINN scores</span></span>
+<span id="cb49-229"><a href="#cb49-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word1"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-230"><a href="#cb49-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word1 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb49-231"><a href="#cb49-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-232"><a href="#cb49-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word2 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb49-233"><a href="#cb49-233" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-234"><a href="#cb49-234" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create combined sentiment columns</span></span>
+<span id="cb49-235"><a href="#cb49-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb49-236"><a href="#cb49-236" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace NA with 0</span></span>
+<span id="cb49-237"><a href="#cb49-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word1 =</span> <span class="fu">replace_na</span>(afinn_word1, <span class="dv">0</span>),</span>
+<span id="cb49-238"><a href="#cb49-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word2 =</span> <span class="fu">replace_na</span>(afinn_word2, <span class="dv">0</span>),</span>
+<span id="cb49-239"><a href="#cb49-239" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-240"><a href="#cb49-240" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combined scores</span></span>
+<span id="cb49-241"><a href="#cb49-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_sum =</span> afinn_word1 <span class="sc">+</span> afinn_word2,</span>
+<span id="cb49-242"><a href="#cb49-242" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-243"><a href="#cb49-243" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-244"><a href="#cb49-244" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sentiment category based on combined score</span></span>
+<span id="cb49-245"><a href="#cb49-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_sentiment_afinn =</span> <span class="fu">case_when</span>(</span>
+<span id="cb49-246"><a href="#cb49-246" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"very positive"</span>,</span>
+<span id="cb49-247"><a href="#cb49-247" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"positive"</span>,</span>
+<span id="cb49-248"><a href="#cb49-248" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"neutral"</span>,</span>
+<span id="cb49-249"><a href="#cb49-249" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"negative"</span>,</span>
+<span id="cb49-250"><a href="#cb49-250" aria-hidden="true" tabindex="-1"></a>      combined_sum <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">"very negative"</span></span>
+<span id="cb49-251"><a href="#cb49-251" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-252"><a href="#cb49-252" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb49-253"><a href="#cb49-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-254"><a href="#cb49-254" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb49-255"><a href="#cb49-255" aria-hidden="true" tabindex="-1"></a>netflix_bigrams_afinn <span class="sc">|&gt;</span></span>
+<span id="cb49-256"><a href="#cb49-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word1, word2, n, afinn_word1, afinn_word2, </span>
+<span id="cb49-257"><a href="#cb49-257" aria-hidden="true" tabindex="-1"></a>         combined_sum, combined_sentiment_afinn) <span class="sc">|&gt;</span></span>
+<span id="cb49-258"><a href="#cb49-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(afinn_word1 <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">|</span> afinn_word2 <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-259"><a href="#cb49-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>)</span>
+<span id="cb49-260"><a href="#cb49-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-261"><a href="#cb49-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-262"><a href="#cb49-262" aria-hidden="true" tabindex="-1"></a>#The Negation Effect: When "Not" Changes Everything</span>
+<span id="cb49-263"><a href="#cb49-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-264"><a href="#cb49-264" aria-hidden="true" tabindex="-1"></a>One of the most fascinating aspects of language is how negation words flip meaning. "Good" is positive, but "not good" is negative. Conversely, "bad" is negative, but "not bad" is positive.</span>
+<span id="cb49-265"><a href="#cb49-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-266"><a href="#cb49-266" aria-hidden="true" tabindex="-1"></a>Let's see how Netflix uses negation:</span>
+<span id="cb49-267"><a href="#cb49-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-270"><a href="#cb49-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-271"><a href="#cb49-271" aria-hidden="true" tabindex="-1"></a>netflix_afinn <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span>
+<span id="cb49-272"><a href="#cb49-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-273"><a href="#cb49-273" aria-hidden="true" tabindex="-1"></a>bigrams_separated <span class="ot">&lt;-</span> netflix_ngram <span class="sc">|&gt;</span></span>
+<span id="cb49-274"><a href="#cb49-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-275"><a href="#cb49-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word1, word2, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-276"><a href="#cb49-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2))</span>
+<span id="cb49-277"><a href="#cb49-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-278"><a href="#cb49-278" aria-hidden="true" tabindex="-1"></a>bigrams_separated <span class="sc">|&gt;</span> <span class="fu">filter</span>(word1 <span class="sc">==</span> <span class="st">"not"</span>)</span>
+<span id="cb49-279"><a href="#cb49-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-280"><a href="#cb49-280" aria-hidden="true" tabindex="-1"></a>not_words <span class="ot">&lt;-</span> bigrams_separated <span class="sc">|&gt;</span></span>
+<span id="cb49-281"><a href="#cb49-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">==</span> <span class="st">"not"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-282"><a href="#cb49-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(netflix_afinn, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">word2 =</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-283"><a href="#cb49-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb49-284"><a href="#cb49-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-285"><a href="#cb49-285" aria-hidden="true" tabindex="-1"></a>not_words</span>
+<span id="cb49-286"><a href="#cb49-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-287"><a href="#cb49-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-290"><a href="#cb49-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-291"><a href="#cb49-291" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "From the most common words that are often accompained by a negation word (no, not, never, without), we can see that the words that come after the negation word never, when combined have a more negative sentiment, whereas words that come after the negation word without, often tend to a slighty positive sentiment."</span></span>
+<span id="cb49-292"><a href="#cb49-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-293"><a href="#cb49-293" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.alt: "This barplot shows the distribution of the most common words combined with negation words in the Netflix dataset based on their sentimemt (positive or negative). In the x-axis we have the sentiment score of these words  ranging from -8 to 3  and the y-axis we have the words that follow a specific negation word. "</span></span>
+<span id="cb49-294"><a href="#cb49-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-295"><a href="#cb49-295" aria-hidden="true" tabindex="-1"></a><span class="co"># An example of expanding the list of negation words</span></span>
+<span id="cb49-296"><a href="#cb49-296" aria-hidden="true" tabindex="-1"></a>negation_words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"not"</span>, <span class="st">"no"</span>, <span class="st">"never"</span>, <span class="st">"without"</span>)</span>
+<span id="cb49-297"><a href="#cb49-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-298"><a href="#cb49-298" aria-hidden="true" tabindex="-1"></a>negated_words <span class="ot">&lt;-</span> bigrams_separated <span class="sc">|&gt;</span></span>
+<span id="cb49-299"><a href="#cb49-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">%in%</span> negation_words) <span class="sc">|&gt;</span></span>
+<span id="cb49-300"><a href="#cb49-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(netflix_afinn, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">word2 =</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-301"><a href="#cb49-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb49-302"><a href="#cb49-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-303"><a href="#cb49-303" aria-hidden="true" tabindex="-1"></a>negated_words</span>
+<span id="cb49-304"><a href="#cb49-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-305"><a href="#cb49-305" aria-hidden="true" tabindex="-1"></a>negated_words <span class="sc">|&gt;</span></span>
+<span id="cb49-306"><a href="#cb49-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">contribution =</span> n <span class="sc">*</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb49-307"><a href="#cb49-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(contribution))) <span class="sc">|&gt;</span></span>
+<span id="cb49-308"><a href="#cb49-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word1) <span class="sc">|&gt;</span></span>
+<span id="cb49-309"><a href="#cb49-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="fu">abs</span>(contribution), <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-310"><a href="#cb49-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb49-311"><a href="#cb49-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word2 =</span> <span class="fu">reorder</span>(word2, contribution)) <span class="sc">|&gt;</span></span>
+<span id="cb49-312"><a href="#cb49-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(n <span class="sc">*</span> value, word2, <span class="at">fill =</span> n <span class="sc">*</span> value <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb49-313"><a href="#cb49-313" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb49-314"><a href="#cb49-314" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> word1, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb49-315"><a href="#cb49-315" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sentiment value * number of occurrences"</span>,</span>
+<span id="cb49-316"><a href="#cb49-316" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Words preceded by negation term"</span>)</span>
+<span id="cb49-317"><a href="#cb49-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-318"><a href="#cb49-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-319"><a href="#cb49-319" aria-hidden="true" tabindex="-1"></a>#Rating Matters: How Language Differs by TV Rating</span>
+<span id="cb49-320"><a href="#cb49-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-321"><a href="#cb49-321" aria-hidden="true" tabindex="-1"></a>Now for the most revealing part of my analysis: How does language change across different TV ratings?</span>
+<span id="cb49-322"><a href="#cb49-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-323"><a href="#cb49-323" aria-hidden="true" tabindex="-1"></a>I filtered out duration-based ratings (like "90 min") and focused on content ratings: TV-MA, TV-14, TV-PG, R and PG-13.</span>
+<span id="cb49-324"><a href="#cb49-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-325"><a href="#cb49-325" aria-hidden="true" tabindex="-1"></a>#Bigrams: Word Pairs by Rating</span>
+<span id="cb49-326"><a href="#cb49-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-329"><a href="#cb49-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-330"><a href="#cb49-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "When analysing how the paired words are distributed across the selected TV rating types, we can see that for R and TV-PG the TV-Shows or Movies have most often paired words with negative or neutral sentiment, whereas for PG-13 and TV-14 we see most often neutral themes."</span></span>
+<span id="cb49-331"><a href="#cb49-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-332"><a href="#cb49-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-333"><a href="#cb49-333" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let's create a bigram dataset with ratings and sentiment</span></span>
+<span id="cb49-334"><a href="#cb49-334" aria-hidden="true" tabindex="-1"></a>bigrams_with_ratings <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb49-335"><a href="#cb49-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-336"><a href="#cb49-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb49-337"><a href="#cb49-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb49-338"><a href="#cb49-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-339"><a href="#cb49-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-340"><a href="#cb49-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2)) <span class="sc">|&gt;</span></span>
+<span id="cb49-341"><a href="#cb49-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word1 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word <span class="sc">&amp;</span> <span class="sc">!</span>word2 <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">|&gt;</span></span>
+<span id="cb49-342"><a href="#cb49-342" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-343"><a href="#cb49-343" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add sentiment for both words using AFINN</span></span>
+<span id="cb49-344"><a href="#cb49-344" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word1"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-345"><a href="#cb49-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word1 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb49-346"><a href="#cb49-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-347"><a href="#cb49-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">afinn_word2 =</span> value) <span class="sc">|&gt;</span></span>
+<span id="cb49-348"><a href="#cb49-348" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-349"><a href="#cb49-349" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate combined sentiment</span></span>
+<span id="cb49-350"><a href="#cb49-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb49-351"><a href="#cb49-351" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word1 =</span> <span class="fu">replace_na</span>(afinn_word1, <span class="dv">0</span>),</span>
+<span id="cb49-352"><a href="#cb49-352" aria-hidden="true" tabindex="-1"></a>    <span class="at">afinn_word2 =</span> <span class="fu">replace_na</span>(afinn_word2, <span class="dv">0</span>),</span>
+<span id="cb49-353"><a href="#cb49-353" aria-hidden="true" tabindex="-1"></a>    <span class="at">combined_score =</span> afinn_word1 <span class="sc">+</span> afinn_word2,</span>
+<span id="cb49-354"><a href="#cb49-354" aria-hidden="true" tabindex="-1"></a>    <span class="at">bigram_sentiment =</span> <span class="fu">case_when</span>(</span>
+<span id="cb49-355"><a href="#cb49-355" aria-hidden="true" tabindex="-1"></a>      combined_score <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"positive"</span>,</span>
+<span id="cb49-356"><a href="#cb49-356" aria-hidden="true" tabindex="-1"></a>      combined_score <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"negative"</span>,</span>
+<span id="cb49-357"><a href="#cb49-357" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"neutral"</span></span>
+<span id="cb49-358"><a href="#cb49-358" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-359"><a href="#cb49-359" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb49-360"><a href="#cb49-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-361"><a href="#cb49-361" aria-hidden="true" tabindex="-1"></a><span class="co"># Now count bigrams by rating and sentiment</span></span>
+<span id="cb49-362"><a href="#cb49-362" aria-hidden="true" tabindex="-1"></a>bigrams_by_rating <span class="ot">&lt;-</span> bigrams_with_ratings <span class="sc">|&gt;</span></span>
+<span id="cb49-363"><a href="#cb49-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, bigram, bigram_sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-364"><a href="#cb49-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating) <span class="sc">|&gt;</span></span>
+<span id="cb49-365"><a href="#cb49-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span>  <span class="co"># Top 5 bigrams per rating</span></span>
+<span id="cb49-366"><a href="#cb49-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb49-367"><a href="#cb49-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-368"><a href="#cb49-368" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb49-369"><a href="#cb49-369" aria-hidden="true" tabindex="-1"></a>bigrams_by_rating <span class="sc">|&gt;</span></span>
+<span id="cb49-370"><a href="#cb49-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(bigram, n), <span class="at">y =</span> n, <span class="at">fill =</span> bigram_sentiment)) <span class="sc">+</span></span>
+<span id="cb49-371"><a href="#cb49-371" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb49-372"><a href="#cb49-372" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb49-373"><a href="#cb49-373" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> rating, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb49-374"><a href="#cb49-374" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"positive"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, </span>
+<span id="cb49-375"><a href="#cb49-375" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"negative"</span> <span class="ot">=</span> <span class="st">"darkred"</span>, </span>
+<span id="cb49-376"><a href="#cb49-376" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"neutral"</span> <span class="ot">=</span> <span class="st">"gray50"</span>)) <span class="sc">+</span></span>
+<span id="cb49-377"><a href="#cb49-377" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb49-378"><a href="#cb49-378" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Most Common Bigrams by TV Rating"</span>,</span>
+<span id="cb49-379"><a href="#cb49-379" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Colored by combined AFINN sentiment score"</span>,</span>
+<span id="cb49-380"><a href="#cb49-380" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Bigrams"</span>, </span>
+<span id="cb49-381"><a href="#cb49-381" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb49-382"><a href="#cb49-382" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Sentiment"</span></span>
+<span id="cb49-383"><a href="#cb49-383" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb49-384"><a href="#cb49-384" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb49-385"><a href="#cb49-385" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb49-386"><a href="#cb49-386" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb49-387"><a href="#cb49-387" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb49-388"><a href="#cb49-388" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)</span>
+<span id="cb49-389"><a href="#cb49-389" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-390"><a href="#cb49-390" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-391"><a href="#cb49-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-392"><a href="#cb49-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-393"><a href="#cb49-393" aria-hidden="true" tabindex="-1"></a>#Unigrams: Single Words by Rating</span>
+<span id="cb49-394"><a href="#cb49-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-397"><a href="#cb49-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-398"><a href="#cb49-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "When analysing how single words are distributed across the selected TV rating types, we can see that for R, TV-MA and TV-14  the TV-Shows or Movies have most often single words with negative sentiment, whereas for PG-13 and TV-PG we see most often positive sentiment"</span></span>
+<span id="cb49-399"><a href="#cb49-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-400"><a href="#cb49-400" aria-hidden="true" tabindex="-1"></a>tidy_netflix <span class="sc">|&gt;</span></span>
+<span id="cb49-401"><a href="#cb49-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-402"><a href="#cb49-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb49-403"><a href="#cb49-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(bing_sentiments, <span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-404"><a href="#cb49-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-405"><a href="#cb49-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating) <span class="sc">|&gt;</span></span>
+<span id="cb49-406"><a href="#cb49-406" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span>  <span class="co"># Top 5 words per rating</span></span>
+<span id="cb49-407"><a href="#cb49-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb49-408"><a href="#cb49-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(word, n), <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb49-409"><a href="#cb49-409" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb49-410"><a href="#cb49-410" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb49-411"><a href="#cb49-411" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> rating, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb49-412"><a href="#cb49-412" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb49-413"><a href="#cb49-413" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Most Common Words by TV Rating"</span>,</span>
+<span id="cb49-414"><a href="#cb49-414" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Words"</span>, </span>
+<span id="cb49-415"><a href="#cb49-415" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb49-416"><a href="#cb49-416" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Sentiment"</span></span>
+<span id="cb49-417"><a href="#cb49-417" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb49-418"><a href="#cb49-418" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb49-419"><a href="#cb49-419" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb49-420"><a href="#cb49-420" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb49-421"><a href="#cb49-421" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb49-422"><a href="#cb49-422" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-423"><a href="#cb49-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-424"><a href="#cb49-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-425"><a href="#cb49-425" aria-hidden="true" tabindex="-1"></a>#Negation Patterns Across Ratings Finally, let's see how negation words behave differently across content ratings:</span>
+<span id="cb49-426"><a href="#cb49-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-429"><a href="#cb49-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-430"><a href="#cb49-430" aria-hidden="true" tabindex="-1"></a>negated_words_by_rating <span class="ot">&lt;-</span> Netflix_Data <span class="sc">|&gt;</span></span>
+<span id="cb49-431"><a href="#cb49-431" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(rating, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+ min$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-432"><a href="#cb49-432" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(rating <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"TV-14"</span>,<span class="st">"PG-13"</span>,<span class="st">"TV-MA"</span>,<span class="st">"TV-PG"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb49-433"><a href="#cb49-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-434"><a href="#cb49-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">line =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb49-435"><a href="#cb49-435" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(bigram, description, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-436"><a href="#cb49-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">"word1"</span>, <span class="st">"word2"</span>), <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-437"><a href="#cb49-437" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(word2)) <span class="sc">|&gt;</span></span>
+<span id="cb49-438"><a href="#cb49-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word1 <span class="sc">%in%</span> negation_words) <span class="sc">|&gt;</span></span>
+<span id="cb49-439"><a href="#cb49-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"word2"</span> <span class="ot">=</span> <span class="st">"word"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-440"><a href="#cb49-440" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(rating, word1, word2, value, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-441"><a href="#cb49-441" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">contribution =</span> n <span class="sc">*</span> value)</span>
+<span id="cb49-442"><a href="#cb49-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-443"><a href="#cb49-443" aria-hidden="true" tabindex="-1"></a>negated_words_by_rating <span class="sc">|&gt;</span></span>
+<span id="cb49-444"><a href="#cb49-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rating, word1) <span class="sc">|&gt;</span></span>
+<span id="cb49-445"><a href="#cb49-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="fu">abs</span>(contribution), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb49-446"><a href="#cb49-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb49-447"><a href="#cb49-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_label =</span> <span class="fu">paste</span>(word1, word2, <span class="at">sep =</span> <span class="st">" → "</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb49-448"><a href="#cb49-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rating, <span class="at">y =</span> <span class="fu">fct_reorder</span>(word_label, contribution), <span class="at">fill =</span> contribution)) <span class="sc">+</span></span>
+<span id="cb49-449"><a href="#cb49-449" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb49-450"><a href="#cb49-450" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb49-451"><a href="#cb49-451" aria-hidden="true" tabindex="-1"></a>      <span class="at">low =</span> <span class="st">"darkred"</span>, </span>
+<span id="cb49-452"><a href="#cb49-452" aria-hidden="true" tabindex="-1"></a>      <span class="at">mid =</span> <span class="st">"white"</span>, </span>
+<span id="cb49-453"><a href="#cb49-453" aria-hidden="true" tabindex="-1"></a>      <span class="at">high =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb49-454"><a href="#cb49-454" aria-hidden="true" tabindex="-1"></a>      <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb49-455"><a href="#cb49-455" aria-hidden="true" tabindex="-1"></a>      <span class="at">name =</span> <span class="st">"Contribution"</span></span>
+<span id="cb49-456"><a href="#cb49-456" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb49-457"><a href="#cb49-457" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb49-458"><a href="#cb49-458" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Negation Word Pairs Across Ratings"</span>,</span>
+<span id="cb49-459"><a href="#cb49-459" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Green = positive context after negation, Red = negative context after negation"</span>,</span>
+<span id="cb49-460"><a href="#cb49-460" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Rating"</span>, </span>
+<span id="cb49-461"><a href="#cb49-461" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Negation → Word pairs"</span></span>
+<span id="cb49-462"><a href="#cb49-462" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb49-463"><a href="#cb49-463" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() </span>
+<span id="cb49-464"><a href="#cb49-464" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb49-465"><a href="#cb49-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-466"><a href="#cb49-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-467"><a href="#cb49-467" aria-hidden="true" tabindex="-1"></a>#What have we Learned About Netflix's Language? </span>
+<span id="cb49-468"><a href="#cb49-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-469"><a href="#cb49-469" aria-hidden="true" tabindex="-1"></a>Based on this comprehensive analysis of over 8,000 Netflix titles, we can conclude that Netflix's description language reveals a sophisticated content strategy that balances emotional appeal with audience targeting. While the raw counts show more negative words (11,465) than positive words (7,919) overall, positive terms like "love," "best," and "work" appear more frequently.</span>
+<span id="cb49-470"><a href="#cb49-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-471"><a href="#cb49-471" aria-hidden="true" tabindex="-1"></a>The most revealing finding here is how language shifts dramatically by content rating: mature-rated content (R, TV-MA, TV-14) relies heavily on negative sentiment words associated with crime, violence, and psychological tension, while youth-oriented ratings (PG-13, TV-PG) feature more positive and neutral language centered on friendship and adventure. In addition the analysis of negation patterns further demonstrates that words following "never" tend toward negative sentiment while those after "without" lean positive, showing how Netflix uses context to create nuanced descriptions that manage viewer expectations.</span>
+<span id="cb49-472"><a href="#cb49-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-473"><a href="#cb49-473" aria-hidden="true" tabindex="-1"></a>Ultimately, these patterns reveal that Netflix's descriptions are carefully crafted linguistic tools that not only summarize content but strategically signal genre conventions, emotional journeys, and appropriate audiences through deliberate word choices and contextual framing.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

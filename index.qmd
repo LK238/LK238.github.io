@@ -1,11 +1,22 @@
 ---
-title: "LK238.github.io"
+title: "Lea Komba"
+image: headshot.jpg
+2toc: false
+about: 
+  template: trestles
+  image-shape: rectangle
+  image-width: 20em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/lea-komba-5b28a91b7
+    - text: GitHub
+      href: https://github.com/LK238/LK238.github.io.git
+    - text: Email
+      href: leakomba45@gmail.com
 ---
 
-This is a Quarto website.
+Dear Visitor,
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Thank you for checking out my website. My name is Lea Komba, and I am a Statistics & Data Science , and Political Science Double major at St.Olaf College (Class of 2028). Uff! That might seem like a lot to read lead alone to do, but these two majors perfectly combine both my interests in social trends and visualizing data. 
 
-```{r}
-1 + 1
-```
+Outside of academics, I am  a social entrepreneur, currently co-founding and running two non-profit organizations in Angola, southern Africa, one is Biso, a social hub that focuses on providing tools and mentorship for the next generation of young change makers in Angola, and the other one id Soppel, which focuses on providng academic mentorship for colleges aged students looking for scholarships abroad. Other than that, I love music and dancing, so invite to a nice concert or live performance anytime. 
